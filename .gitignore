@@ -1,0 +1,5 @@
+*.log
+logs/
+.ensime_cache
+.vscode/
+.DS_STORE

@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  livy:
+    build: .
+    ports:
+      - 8998:8998
+
+  spark:
+    build: ./spark
+    volumes:
+      - ./src:/src
