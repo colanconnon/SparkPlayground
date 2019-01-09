@@ -1,0 +1,1 @@
+$SPARK_HOME/bin/spark-submit --jars=sqljdbc42.jar --class=streaming target/scala-2.11/simple-project_2.11-1.0.jar

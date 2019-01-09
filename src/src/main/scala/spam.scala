@@ -1,4 +1,5 @@
 /* pi.scala */
+
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.classification.DecisionTreeClassificationModel
@@ -12,7 +13,7 @@ object spam {
     val sc = spark.sparkContext
     sc.setLogLevel("WARN")
     val data = spark.read.format("csv").option("header", "true").load("./spam.csv").na.drop(Array("v1", "v2"))
-    
+
     val labelIndexer = new StringIndexer()
       .setInputCol("v1")
       .setOutputCol("indexedLabel")
@@ -25,7 +26,7 @@ object spam {
       .setOutputCol("indexedFeatures")
       .setVectorSize(3)
       .setMinCount(0)
-  
+
     val Array(trainingData, testData) = data.randomSplit(Array(0.8, 0.2))
 
     val dt = new DecisionTreeClassifier()
@@ -38,7 +39,7 @@ object spam {
       .setLabels(labelIndexer.labels)
 
     val pipeline = new Pipeline()
-    .setStages(Array(tokenizer, labelIndexer, featureIndexer, dt, labelConverter))
+      .setStages(Array(tokenizer, labelIndexer, featureIndexer, dt, labelConverter))
 
     val model = pipeline.fit(trainingData)
 
@@ -52,7 +53,7 @@ object spam {
       .setMetricName("accuracy")
     val accuracy = evaluator.evaluate(predictions)
     println(s"Test Error = ${(1.0 - accuracy)}")
-    
+
     spark.stop()
   }
 }

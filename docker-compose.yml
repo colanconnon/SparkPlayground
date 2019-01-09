@@ -11,3 +11,13 @@ services:
     build: ./spark
     volumes:
       - ./src:/src
+  
+  mssql:
+      image: microsoft/mssql-server-linux:latest
+      environment: 
+          - ACCEPT_EULA=Y
+          - SA_PASSWORD=YourStrong!Passw0rd
+      ports:
+          - 1433:1433
+      volumes:
+          - /var/opt/mssql
