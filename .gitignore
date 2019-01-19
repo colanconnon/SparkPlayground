@@ -3,3 +3,7 @@ logs/
 .ensime_cache
 .vscode/
 .DS_STORE
+.idea/
+.pytest_cache/
+project/
+

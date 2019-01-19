@@ -7,10 +7,24 @@ services:
     ports:
       - 8998:8998
 
+  python:
+    image: python:3.6
+
+  hbase:
+    build: ./hbase/
+    ports:
+      - 16010:16010
+      - 60000:60000
+
   spark:
     build: ./spark
     volumes:
-      - ./src:/src
+      - ./scala:/src
+
+  pyspark:
+    build: ./pyspark
+    volumes:
+      - ./python:/src
   
   mssql:
       image: microsoft/mssql-server-linux:latest
@@ -21,3 +35,13 @@ services:
           - 1433:1433
       volumes:
           - /var/opt/mssql
+
+  solr:
+    image: solr
+    ports:
+     - "8983:8983"
+    volumes:
+      - data:/opt/solr/server/solr/mycores
+
+volumes:
+  data:
