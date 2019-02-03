@@ -26,6 +26,14 @@ services:
     volumes:
       - ./python:/src
   
+  zookeeper:
+    build: ./zookeeper
+    ports:
+      - 2181:2181
+
+  kafka:
+    build: ./kafka
+  
   mssql:
       image: microsoft/mssql-server-linux:latest
       environment: 
